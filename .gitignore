@@ -1,0 +1,10 @@
+# Ignore the Python virtual environment
+venvk/
+__pycache__/
+*.pyc
+
+# Ignore the local SQLite database containing test client data
+db.sqlite3
+
+# Ignore local environment configurations
+.env

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>UZDcars - Client Leads</title>
+</head>
+<body>
+
+    <h1>UZDcars Contact Manager</h1>
+    <form method="POST" action="">
+   
+    {% csrf_token %} 
+    
+    
+    {{ form.as_p }}
+    
+    <button type="submit">Log New Client</button>
+</form>
+    <hr>
+    <h2>All Client Leads (Active & Inactive)</h2>
+
+    <table border="1" cellpadding="10">
+        <thead>
+            <tr>
+                <th>Client Name</th>
+                <th>Phone Number</th>
+                <th>Requested Vehicle</th>
+                <th>Max Budget</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+           
+            {% for lead in leads %}
+            <tr>
+                <td><strong>{{ lead.name }}</strong></td>
+                <td>{{ lead.phone_number }}</td>
+                <td>{{ lead.desired_car }}</td>
+                <td>{{ lead.max_budget }}</td>
+                <td>
+                    {% if lead.is_active %}
+                        <span style="color: green;">🟢 Active</span>
+                    {% else %}
+                        <span style="color: gray;">🔴 Closed/Inactive</span>
+                    {% endif %}
+                </td>
+            </tr>
+            
+            {% empty %}
+            <tr>
+                <td colspan="5">No client leads logged yet.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
